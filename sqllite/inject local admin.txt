@@ -1,0 +1,10 @@
+INSERT INTO "main"."Admin" ("id", "Name", "NameLowered", "Type", "LastActiveTime", "PasswordHash", "PasswordIsTemporary", "PasswordChangedTime", "PasswordHistory", "UnlockTime", "InvalidLoginAttempts", "Permissions") VALUES (X'b76a1d7bc3ad5ac4863606ce71ba3af3', 'Local computer\Administrators', 'local computer\administrators', '2', '1608331504', '', '1', '1608331504', '[]', '0', '[]', '{
+  "ACLs": [],
+  "Level": "Server",
+  "ManageCom": true,
+  "ManagePersonalData": true,
+  "ManageReporting": true,
+  "RestAccess": true,
+  "RestAdminRole": "server_full_access",
+  "SettingsTemplates": []
+}');

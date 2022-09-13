@@ -1,0 +1,1 @@
+UPDATE AdvancedWorkflow set settings = json_set(AdvancedWorkflow.Settings, '$.LogDir', '\\file.core.windows.net\gsbslogs\AWE\')

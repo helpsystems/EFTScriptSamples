@@ -1,0 +1,1 @@
+SELECT name, NameLowered, json_extract(GeneralTab, '$.HomeFolder'), datetime(json_extract(Stats, '$.LastConnectedTime'), 'unixepoch', 'localtime')FROM Client;

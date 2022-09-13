@@ -1,0 +1,52 @@
+Set SFTPServer = WScript.CreateObject("SFTPCOMInterface.CIServer")
+
+CRLF = (Chr(13)& Chr(10))
+
+welcomeMsg = "The script you are running is used to retrieve registration status"
+msgTitle = "Globalscape EFT Server"
+serverMessage = "Enter EFT Server IP..."
+portMessage = "Enter EFT Server Port..."
+adminMessage = "Enter EFT Admin username..."
+passMessage = "Enter EFT Admin password..."
+moduleMessage = "Enter Integer for Module You want to Check"
+txtMyOutputFileName = "RegistrationStatus.csv"
+
+'Display welcome message
+Call MsgBox (welcomeMsg, , msgTitle)
+
+'Input Prompts
+txtServer = InputBox (serverMessage, msgTitle)
+txtPort = InputBox (portMessage, msgTitle)
+txtAdminUserName = InputBox(adminMessage, msgTitle)
+txtPassword = InputBox(passMessage, msgTitle)
+txtModuleInt = InputBox(moduleMessage, msgTitle)
+
+If Not Connect(txtServer, txtPort, txtAdminUserName, txtPassword) Then
+  WScript.Quit(0)
+End If
+
+Set myFSO = CreateObject("Scripting.FileSystemObject")
+Set WriteStuff = myFSO.OpenTextFile(txtMyOutputFileName, 8, True)
+
+dim RegState 
+RegState = SFTPServer.ModuleRegistrationState(txtModuleInt)
+MsgBox RegState
+
+SFTPServer.Close
+Set SFTPServer = nothing
+
+Function Connect (serverOrIpAddress, port, username, password)
+
+  On Error Resume Next
+  Err.Clear
+
+  SFTPServer.Connect serverOrIpAddress, port, username, password
+
+  If Err.Number <> 0 Then
+    WScript.Echo "Error connecting to '" & serverOrIpAddress & ":" &  port & "' -- " & err.Description & " [" & CStr(err.Number) & "]", vbInformation, "Error"
+    Connect = False
+    Exit Function
+  End If
+
+  Connect = True
+End Function
