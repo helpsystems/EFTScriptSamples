@@ -1,0 +1,1 @@
+Get-ChildItem -path "\\file.core.windows.net\gsbdata\" -Recurse -Force | Export-Csv D:\siteroot.csv
